@@ -37,6 +37,14 @@ Permitir la administración de:
 
 ## Cómo ejecutar el proyecto
 
+### Prerrequisitos
+
+Antes de iniciar, asegúrate de tener instalado:
+
+Java 21
+Maven (o usar mvnw)
+Docker (opcional pero recomendado)
+
 ### Opción 1: Ejecución local (RECOMENDADO)
 
 #### 1. Clonar repositorio
