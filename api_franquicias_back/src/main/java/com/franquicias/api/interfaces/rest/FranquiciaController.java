@@ -1,4 +1,4 @@
-package com.franquicias.api.infrastructure.controller;
+package com.franquicias.api.interfaces.rest;
 
 import com.franquicias.api.application.dto.*;
 import com.franquicias.api.application.mapper.FranquiciaMapper;

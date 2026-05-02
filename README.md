@@ -23,7 +23,7 @@ Permitir la administración de:
 - Spring Data MongoDB
 - MongoDB
 - Maven
-- Docker (opcional)
+- (Docker como Infraestructura como Código - IaC)
 
 ---
 
@@ -54,7 +54,12 @@ cd api_franquicias/api_franquicias_back
 
 #### 2. Levantar MongoDB
 
+Si no tienes Mongo instalado localmente, usa Docker:
+
 docker run -d -p 27017:27017 --name mongo mongo
+
+Verifica que esta corriendo:
+docker ps
 
 #### 3. Ejecutar la API
 
@@ -109,14 +114,72 @@ mongodb://localhost:27017
 
 ---
 
+## Tests
+
+Para ejecutar las pruebas unitarias:
+
+```bash
+./mvnw test
+
+---
+
 ## Arquitectura
 
-- Controller
-- Service
-- Domain Model
-- Repository
-- DTO / Mapper
+El proyecto sigue Clean Architecture, separando responsabilidades para mantener el sistema escalable, mantenible y testeable:
 
+Controller (API Layer)
+Expone los endpoints REST y recibe las peticiones HTTP.
+Application / Service Layer
+Contiene la lógica de negocio del sistema.
+Domain Layer
+Modelos del negocio (Franquicia, Sucursal, Producto) sin dependencias externas.
+Infrastructure Layer
+Implementación de persistencia (MongoDB), configuración y adaptadores.
+Repository Layer
+Abstracción del acceso a datos.
+DTO / Mappers
+Transformación entre entidades del dominio y objetos de transferencia.
+
+
+---
+
+## Enfoque Reactivo
+
+El sistema está preparado para un enfoque reactivo (Reactive Programming) en su diseño de servicios, permitiendo:
+
+Manejo eficiente de múltiples peticiones concurrentes
+Mejor escalabilidad bajo carga
+Base para evolución futura a Spring WebFlux si se requiere
+
+Actualmente la implementación puede ser imperativa (Spring MVC), pero la arquitectura está pensada para migración/reactividad sin reescritura total.
+
+---
+
+## Docker como Infraestructura como Código (IaC)
+
+El proyecto utiliza Docker para definir y reproducir el entorno completo de ejecución:
+
+Base de datos MongoDB containerizada
+API Spring Boot containerizada
+Orquestación con docker-compose
+
+Esto permite:
+
+Levantar el sistema completo con un solo comando
+Evitar configuración manual del entorno
+Garantizar consistencia entre desarrollo y producciónDocker como Infraestructura como Código (IaC)
+
+El proyecto utiliza Docker para definir y reproducir el entorno completo de ejecución:
+
+Base de datos MongoDB containerizada
+API Spring Boot containerizada
+Orquestación con docker-compose
+
+Esto permite:
+
+Levantar el sistema completo con un solo comando
+Evitar configuración manual del entorno
+Garantizar consistencia entre desarrollo y producción
 
 ---
 
